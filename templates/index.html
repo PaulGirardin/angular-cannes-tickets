@@ -10,11 +10,12 @@
 		</div>
 		<div ng-repeat="data in ctrl.data" ng-show="$index >= 0">
 			<div ng-if="d[0] == ('2016-05-' + day) " ng-repeat="d in data" ng-show="$index >= 3">
-				<div class="col col-md-1 seance {$index}" ng-class="{true: 'salle-debussy', false: ''}[d[2] == 'Debussy']">
+				<div class="col col-md-1 seance" ng-class="{'salle-debussy' :  d[2] == 'Debussy', $index:true}">
 					<div class="title">{{ data[0] }}</div>
 					<div class="real">{{ data[1] }}</div>
 					<div class="duration">{{ data[2] }}</div>
 					<div class="hour">{{ d[1] }}</div>
+					<div class="hour">{{ d[2] }}</div>
 				</div>
 		    </div>
 		</div>

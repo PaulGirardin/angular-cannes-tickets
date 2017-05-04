@@ -33,9 +33,9 @@ app.controller('FrontController',
 
           littleArray.forEach(function (d, index) {
             if (index > 2) {
-              finalArray.push(d.split(','));
+              finalArray.push(d.split(',').map(elt => elt.trim()));
             } else {
-              finalArray.push(d);
+              finalArray.push(d.trim());
             }
           });
 
