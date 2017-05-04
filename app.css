@@ -1,0 +1,36 @@
+#da-table {
+	background-color: #A0A0A0;
+	width: 100%;
+	margin-top: -30px;
+}
+
+.container {
+	margin: 0;
+	padding: 0;
+}
+
+.lumiere, .debussy {
+	text-align: center;
+	background-color: #222;
+	color: white;
+	margin: 5px;
+}
+
+.row {
+	margin-top: 30px;
+}
+
+.seance {
+	border: 1px solid black;
+	background-color: white;
+	width: 180px;
+	font-size: 12px;
+}
+
+.date {
+	width: 120px;
+}
+
+.salle-debussy {
+	background-color: orange;
+}

@@ -1,0 +1,13 @@
+{
+	"name": "cannes-ticket",
+	"dependencies" : {
+		"foundation-sites": "~6.3.0",
+		"angular": "^1.6.4",
+		"angular-foundation-6": "^0.11.5",
+		"angular-touch": "~1.6.4",
+		"angular-route": "~1.6.4"
+	},
+	"resolutions": {
+		"angular": "^1.6.0"
+	}
+}

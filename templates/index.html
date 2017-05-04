@@ -1,0 +1,22 @@
+<div id="da-table">
+	<div class="row">
+		<div class="col col-md-1 date"></div>
+		<div class="col col-md-1 debussy">DEBUSSY</div>
+		<div class="col col-md-9 lumiere">LUMIÈRE</div>
+	</div>
+	<div ng-repeat="day in [14,15,16,17,18,19,20]" class="row">
+		<div class="col col-md-1 date vcenter">
+			2016-05-{{ day }}
+		</div>
+		<div ng-repeat="data in ctrl.data" ng-show="$index >= 0">
+			<div ng-if="d[0] == ('2016-05-' + day) " ng-repeat="d in data" ng-show="$index >= 3">
+				<div class="col col-md-1 seance {$index}" ng-class="{true: 'salle-debussy', false: ''}[d[2] == 'Debussy']">
+					<div class="title">{{ data[0] }}</div>
+					<div class="real">{{ data[1] }}</div>
+					<div class="duration">{{ data[2] }}</div>
+					<div class="hour">{{ d[1] }}</div>
+				</div>
+		    </div>
+		</div>
+	</div>
+</div>
