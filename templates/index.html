@@ -8,15 +8,51 @@
 		<div class="col col-md-1 date vcenter">
 			2016-05-{{ day }}
 		</div>
-		<div ng-repeat="data in ctrl.data" ng-show="$index >= 0">
-			<div ng-if="d[0] == ('2016-05-' + day) " ng-repeat="d in data" ng-show="$index >= 3">
-				<div class="col col-md-1 seance" ng-class="{'salle-debussy' :  d[2] == 'Debussy', $index:true}">
-					<div class="title">{{ data[0] }}</div>
-					<div class="real">{{ data[1] }}</div>
-					<div class="duration">{{ data[2] }}</div>
-					<div class="hour">{{ d[1] }}</div>
-					<div class="hour">{{ d[2] }}</div>
+		<div ng-repeat="seance in ctrl.seances" ng-init="lastIter = $last; seanceIndex = $index">
+			{{ ctrl.seanceFound=false;"" }}
+			<div ng-repeat="data in ctrl.data" ng-show="$index >= 0" ng-init="currentData = $index">
+				<div ng-repeat="d in data" ng-if="d[0] == ('2016-05-' + day)" ng-init="lastD = $last">
+					<div class="col col-md-1 seance salle-debussy" ng-if="d[2] == 'Debussy' && seance == ctrl.seances[0]"
+						ng-click="ctrl.demand()">
+						<div class="title"><b>{{ data[0] }}</b><div ng-if="d[3]" class="high-demand"></div></div>
+						<div class="real">Real : {{ data[1] }}</div>
+						<div class="duration">Duration : {{ data[2] }}</div>
+						<div class="hour">Begins at : {{ d[1] }}</div>
+						<div class="room">Room : {{ d[2] }}</div>
+						{{ ctrl.seanceFound=true;"" }}
+					</div>
+
+					<div class="col col-md-1 seance" ng-if="lastIter == false && d[1] >= seance && d[1] < ctrl.seances[seanceIndex+1] && d[2] != 'Debussy'"
+						ng-click="ctrl.demand()">
+						<div class="title"><b>{{ data[0] }}</b><div ng-if="d[3]" class="high-demand"></div></div>
+						<div class="real">Real : {{ data[1] }}</div>
+						<div class="duration">Duration : {{ data[2] }}</div>
+						<div class="hour">Begins at : {{ d[1] }}</div>
+						<div class="room">Room : {{ d[2] }}</div>
+						{{ ctrl.seanceFound=true;"" }}
+					</div>
+
+					<div class="col col-md-1 seance" ng-if="d[2] != 'Debussy' && lastIter && (d[1] < ctrl.seances[0] || d[1] >= seance)"
+						ng-click="ctrl.demand()">
+						<div class="title"><b>{{ data[0] }}</b><div ng-if="d[3]" class="high-demand"></div></div>
+						<div class="real">Real : {{ data[1] }}</div>
+						<div class="duration">Duration : {{ data[2] }}</div>
+						<div class="hour">Begins at : {{ d[1] }}</div>
+						<div class="room">Room : {{ d[2] }}</div>
+						{{ ctrl.seanceFound=true;"" }}
+					</div>
+
+					<div class="col col-md-1 seance" 
+						ng-if="lastD
+						&& (! ctrl.data[currentData+1] || ctrl.data[currentData+1][3][0] == ('2016-05-' + (day+1))) 
+						&& ctrl.seanceFound == false
+						&& d[2] != 'Debussy' 
+						&& (d[1] < seance || d[1] >= ctrl.seances[seanceIndex+1])
+						">
+						{{ seance }} : vide
+					</div>
 				</div>
+
 		    </div>
 		</div>
 	</div>

@@ -21,6 +21,9 @@ app.controller('FrontController',
     function($scope, $http, $q){
     var ctrl= this;
     ctrl.data = null;
+    ctrl.seances = ['08:30', '11:00', '13:30', '15:00', '18:30', '22:00'];
+    ctrl.seanceFound = false;
+    ctrl.credit = 7;
     
     var promListing = $http.get("raw-data.txt");
     promListing.then(function(response){
@@ -62,6 +65,38 @@ app.controller('FrontController',
         }, function(){
                 console.error("OOPS !")
             });
+
+
+    ctrl.demand = function ($event) {
+
+      var targeted = $(event.target);
+      if (! targeted.hasClass('seance')) {
+        targeted = targeted.parent();
+      }
+
+      if (targeted.hasClass('demanded')) {
+        return;
+      }
+
+      if (targeted.children().first().children().hasClass('high-demand')) {
+        if (ctrl.credit < 2) {
+          alert('You haven\'t enough credit');
+          return;
+        }
+
+        ctrl.credit -= 2;
+      } else {
+        if (ctrl.credit < 1) {
+          alert('You haven\'t enough credit');
+          return;
+        }
+
+        ctrl.credit -= 1;
+      }
+
+      targeted.addClass('demanded');
+    }
+
 
     // ctrl.placeMarker = function(map, position){
     //   ctrl.marker.setPosition(position);
